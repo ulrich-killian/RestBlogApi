@@ -2,7 +2,7 @@ import express from 'express'
 import 'dotenv/config'
 import { connectDb } from './src/config/db.config.js'
 import { createTables } from './src/models/schema.js'
-import authRoutes from './src/routes/auth.routes.js';
+import authRoutes from './src/routes/auth.route.js';
 
 
 const app = express()
