@@ -2,7 +2,8 @@ import express from 'express';
 import { register, login, getUser, uploadProfilePicture } from '../controllers/authController.js';
 import { protect } from '../middleware/authMiddleware.js';
 import { validateRegister, validateLogin, checkValidation } from '../validations/authValidators.js';
-
+import { authLimiter } from '../middleware/ratelimit.js';
+import { upload } from '../middleware/upload.js';
 
 
 const router = express.Router();
