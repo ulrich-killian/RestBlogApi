@@ -8,7 +8,6 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js",
     "dev": "nodemon server.js"
-
   },
   "repository": {
     "type": "git",
@@ -22,10 +21,18 @@
   },
   "homepage": "https://github.com/ulrich-killian/RestBlogApi#readme",
   "dependencies": {
-    "express": "^5.2.1"
+    "bcrypt": "^6.0.0",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "pg": "^8.21.0",
+    "pg-pool": "^3.14.0"
   },
   "devDependencies": {
     "dotenv": "^17.4.2",
     "nodemon": "^3.1.14"
+  },
+  "allowScripts": {
+    "bcrypt@6.0.0": true,
+    "fsevents@2.3.3": true
   }
 }

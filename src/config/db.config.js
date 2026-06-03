@@ -1,0 +1,26 @@
+import pkg from 'pg'
+import dotenv from 'dotenv'
+
+
+dotenv.config();
+
+const { Pool } = pkg;
+
+const pool = new Pool ({ 
+   connectionString: process.env.DATABASE_URL,
+   ssl: { rejectUnauthorized: false }
+ })
+
+async function connectDb() {
+   try {
+      const client = await Pool.Connect()
+      if(client){
+         console.log('Database connected successfully synchrnouzing');
+         client.release();
+      }
+   } catch (err) {
+      console.error('Database connection error:', err);
+   }
+} 
+
+export { pool, connectDb };
