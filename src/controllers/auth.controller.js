@@ -26,6 +26,18 @@ export const login = async (req, res) => {
   }
 };
 
+export const getUser = async (req, res) => {
+  try {
+    const user = await authService.getMe(req.user.id)
+    res.status(200).json({ success: true, data: user });
+  } catch (error) {
+    if (error.message === 'USER_NOT_FOUND') {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+};
+
 
 export const uploadProfile = async (req, res) => {
    try {
