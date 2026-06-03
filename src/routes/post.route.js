@@ -5,16 +5,16 @@ import {
   createPost,
   updatePost,
   deletePost
-} from '../controllers/postController.js';
-import { protect } from '../middleware/authMiddleware.js';
-import { validatePost, checkValidation } from '../validations/postValidators.js';
+} from '../controllers/post.controller.js';
+import { protectedEntry } from '../middleware/auth.middleware.js';
+import { validatePost, checkValidation } from '../validation/post.validation.js';
 
 const router = express.Router();
 
 router.get('/', getAllPosts);
 router.get('/:id', getPostById);
-router.post('/', protect, validatePost, checkValidation, createPost);
-router.put('/:id', protect, updatePost);
-router.delete('/:id', protect, deletePost);
+router.post('/', protectedEntry, validatePost, checkValidation, createPost);
+router.put('/:id', protectedEntry, updatePost);
+router.delete('/:id', protectedEntry, deletePost);
 
 export default router;

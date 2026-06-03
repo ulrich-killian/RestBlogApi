@@ -1,4 +1,4 @@
-import { pool } from '../config/database.config.js';
+import { pool } from '../config/db.config.js';
 
 export const findCommentsByPostId = async (postId) => {
   const result = await pool.query(`
