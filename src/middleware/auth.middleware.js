@@ -1,6 +1,6 @@
 import jwt, { decode } from 'jsonwebtoken'
 
-export const protectEntry = async (req, res, next) => {
+export const protectedEntry = async (req, res, next) => {
    let token = req.headers.authorization;
    if(!token || !token.startWith('Bearer')) {
       return res.status(401).json({ message: 'Unauthorized, missing token' })

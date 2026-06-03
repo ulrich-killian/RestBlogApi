@@ -27,7 +27,7 @@ export const login = async (req, res) => {
 };
 
 
-export const uploadProfilePicture = async (req, res) => {
+export const uploadProfile = async (req, res) => {
    try {
      if (!req.file) {
        return res.status(400).json({ message: 'No file uploaded' });
