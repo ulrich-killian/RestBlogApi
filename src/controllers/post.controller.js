@@ -1,6 +1,7 @@
 import * as postService from '../services/post.service.js';
+import AppError from '../utils/appError.js'
 
-export const getAllPosts = async (req, res) => {
+export const getAllPosts = async (req, res, next) => {
   try {
     const { limit = 10, offset = 0, q } = req.query;
     const result = await postService.getAllPosts({
@@ -10,67 +11,52 @@ export const getAllPosts = async (req, res) => {
     });
     res.status(200).json({ success: true, ...result });
   } catch (error) {
-    res.status(500).json({ message: 'Error fetching posts', error: error.message });
+    next(error);
   }
 };
 
-export const getPostById = async (req, res) => {
+export const getPostById = async (req, res, next) => {
   try {
     const post = await postService.getPostById(req.params.id);
     res.status(200).json({ success: true, data: post });
   } catch (error) {
-    if (error.message === 'POST_NOT_FOUND') {
-      return res.status(404).json({ message: 'Post not found' });
-    }
-    res.status(500).json({ message: 'Error fetching post', error: error.message });
+    next(error);
   }
 };
 
-export const createPost = async (req, res) => {
+export const createPost = async (req, res, next) => {
   try {
     const { title, content } = req.body;
     const post = await postService.createPost({
       title,
       content,
-      author_id: req.user.id
+      author_id: req.user.userId
     });
     res.status(201).json({ success: true, data: post });
   } catch (error) {
-    res.status(500).json({ message: 'Error creating post', error: error.message });
+   next(error)
   }
 };
 
-export const updatePost = async (req, res) => {
+export const updatePost = async (req, res, next) => {
   try {
     const { title, content } = req.body;
     const post = await postService.updatePost(
       req.params.id,
-      req.user.id,
+      req.user.userId,
       { title, content }
     );
     res.status(200).json({ success: true, data: post });
   } catch (error) {
-    if (error.message === 'POST_NOT_FOUND') {
-      return res.status(404).json({ message: 'Post not found' });
+    next(error)
     }
-    if (error.message === 'UNAUTHORIZED') {
-      return res.status(403).json({ message: 'You can only update your own posts' });
-    }
-    res.status(500).json({ message: 'Error updating post', error: error.message });
-  }
 };
 
-export const deletePost = async (req, res) => {
+export const deletePost = async (req, res, next) => {
   try {
-    await postService.deletePost(req.params.id, req.user.id);
+    await postService.deletePost(req.params.id, req.user.userId);
     res.status(200).json({ success: true, message: 'Post deleted successfully' });
   } catch (error) {
-    if (error.message === 'POST_NOT_FOUND') {
-      return res.status(404).json({ message: 'Post not found' });
-    }
-    if (error.message === 'UNAUTHORIZED') {
-      return res.status(403).json({ message: 'You can only delete your own posts' });
-    }
-    res.status(500).json({ message: 'Error deleting post', error: error.message });
-  }
+   next(error)
+ }
 };

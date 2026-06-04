@@ -1,49 +1,41 @@
 import * as authService from '../services/auth.service.js';
 import { pool } from '../config/db.config.js';
+import AppError from '../utils/appError.js';
 
-export const register = async (req, res) => {
+export const register = async (req, res, next) => {
    try {
       const { username, email, password } = req.body;
 
       const result = await authService.register({ username, email, password });
       res.status(201).json({ success: true, ...result });
    } catch (error) {
-      if (error.message === 'Email or username already exist'){
-         return res.status(409).json({ message: 'Email or username already exist ' });
-      }
-      res.status(500).json({  message: 'Server error', error: error.message })
+     next(error);
    }
 };
 
-export const login = async (req, res) => {
+export const login = async (req, res, next) => {
      try {
       const user = await authService.getUser(req.user.id);
       res.status(200).json({ success: true, data: user });
      } catch (error) {
-      if (error.message === 'USER_NOT_FOUND') {
-         return res.status(404).json({ message: 'User not found' });
-     }
-     res.status(500).json({ message: 'Server error', error: error.message });
+      next(error);
   }
 };
 
-export const getUser = async (req, res) => {
+export const getUser = async (req, res, next) => {
   try {
     const user = await authService.getUser(req.user)
     res.status(200).json({ success: true, data: user });
   } catch (error) {
-    if (error.message === 'USER_NOT_FOUND') {
-      return res.status(404).json({ message: 'User not found' });
-    }
-    res.status(500).json({ message: 'Server error', error: error.message });
+   next(error);
   }
 };
 
 
-export const uploadProfile = async (req, res) => {
+export const uploadProfile = async (req, res, next) => {
    try {
      if (!req.file) {
-       return res.status(400).json({ message: 'No file uploaded' });
+       throw new AppError('No file uploaded', 400);
      }
  
      const fileUrl = `/uploads/${req.file.filename}`;
@@ -59,6 +51,6 @@ export const uploadProfile = async (req, res) => {
        profile_picture: fileUrl
      });
    } catch (error) {
-     res.status(500).json({ message: 'Error uploading profile picture', error: error.message });
+     next(error);
    }
  };

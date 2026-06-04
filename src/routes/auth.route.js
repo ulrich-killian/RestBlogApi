@@ -11,6 +11,6 @@ const router = express.Router();
 router.post('/register', authLimiter, valideRegister, checkValidation, register);
 router.post('/login', authLimiter, validateLogin, checkValidation, login);
 router.get('/user', protectedEntry, getUser);
-router.post('/profile_upload', protectedEntry, upload.single('profile_picture'), uploadProfile);
+router.post('/profile_upload', protectedEntry, upload.single('file'), uploadProfile);
 
 export default router;

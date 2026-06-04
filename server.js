@@ -14,6 +14,7 @@ import swaggerUi from 'swagger-ui-express';
 import helmet from 'helmet';
 import cors from 'cors';
 import swaggerSpec from './swagger.js';
+import { globalErrorHandler }  from './src/middleware/error.middleware.js'
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -54,6 +55,8 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.get('/', (req, res) => {
    res.send('welcome to restfulblog api')
 })
+
+app.use(globalErrorHandler);
 
 const startServer = async () => {
    try {
