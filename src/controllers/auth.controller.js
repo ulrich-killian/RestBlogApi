@@ -14,12 +14,13 @@ export const register = async (req, res, next) => {
 };
 
 export const login = async (req, res, next) => {
-     try {
-      const user = await authService.getUser(req.user.id);
-      res.status(200).json({ success: true, data: user });
-     } catch (error) {
+   try {
+      const { email, password } = req.body;
+      const result = await authService.login({ email, password });
+      res.status(200).json({ success: true, ...result });
+   } catch (error) {
       next(error);
-  }
+   }
 };
 
 export const getUser = async (req, res, next) => {

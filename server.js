@@ -13,7 +13,7 @@ import { fileURLToPath } from 'url';
 import swaggerUi from 'swagger-ui-express';
 import helmet from 'helmet';
 import cors from 'cors';
-import swaggerSpec from './swagger.js';
+import swaggerSpec from './src/config/swagger.js';
 import { globalErrorHandler }  from './src/middleware/error.middleware.js'
 
 

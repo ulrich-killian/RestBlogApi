@@ -3,9 +3,10 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import dotenv from 'dotenv';
-import authRoutes from '../src/routes/authRoutes.js';
-import postRoutes from '../src/routes/postRoutes.js';
-import commentRoutes from '../src/routes/commentRoutes.js';
+import authRoutes from '../src/routes/auth.route.js';
+import postRoutes from '../src/routes/post.route.js';
+import commentRoutes from '../src/routes/comment.route.js';
+import { globalErrorHandler } from '../src/middleware/error.middleware.js';
 
 dotenv.config();
 
@@ -16,6 +17,8 @@ app.use(express.json());
 app.use('/auth', authRoutes);
 app.use('/posts', postRoutes);
 app.use('/posts/:id/comments', commentRoutes);
+
+app.use(globalErrorHandler);
 
 // shared state across tests
 let token;
@@ -79,16 +82,16 @@ describe('Auth Endpoints', () => {
     expect(res.statusCode).toBe(401);
   });
 
-  test('GET /auth/me — should return logged in user', async () => {
+  test('GET /auth/user — should return logged in user', async () => {
     const res = await request(app)
-      .get('/auth/me')
+      .get('/auth/user')
       .set('Authorization', `Bearer ${token}`);
     expect(res.statusCode).toBe(200);
     expect(res.body.data.email).toBe(testEmail);
   });
 
-  test('GET /auth/me — should fail without token', async () => {
-    const res = await request(app).get('/auth/me');
+  test('GET /auth/user — should fail without token', async () => {
+    const res = await request(app).get('/auth/user');
     expect(res.statusCode).toBe(401);
   });
 });
@@ -215,7 +218,7 @@ describe('Comment Endpoints', () => {
     expect(res.body.success).toBe(true);
   });
 });
-import { pool } from '../src/config/database.config.js';
+import { pool } from '../src/config/db.config.js';
 
 afterAll(async () => {
   await pool.end();

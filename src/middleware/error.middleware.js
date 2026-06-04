@@ -21,7 +21,7 @@ export const globalErrorHandler = (err, req, res, next) => {
   }
 
 
-  if (err.isOperational) {
+  if (err.isOperational || (err.statusCode >= 400 && err.statusCode < 500)) {
     return res.status(err.statusCode).json({
       status: err.status,
       message: err.message
@@ -30,7 +30,6 @@ export const globalErrorHandler = (err, req, res, next) => {
 
 
   console.error(' SYSTEM ERROR OCCURRED:', err);
-
 
   return res.status(500).json({
     status: 'error',
