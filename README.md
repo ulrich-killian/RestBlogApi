@@ -106,11 +106,11 @@ Base URL: `https://restfull-blog-api.onrender.com`
 
 ###  Authentication
 
-| Method | Endpoint | Auth | Description |
-| :--- | :--- | :--- | :--- |
-| `POST` | `/auth/register` | Public | Register a new user. Returns `201` with JWT. |
-| `POST` | `/auth/login` | Public | Authenticate user. Returns JWT or `401`. |
-| `GET` | `/auth/me` |  Required | Get logged in user info. |
+| Method | Endpoint               | Auth | Description |
+| :--- |:-----------------------| :--- | :--- |
+| `POST` | `/auth/register`       | Public | Register a new user. Returns `201` with JWT. |
+| `POST` | `/auth/login`          | Public | Authenticate user. Returns JWT or `401`. |
+| `GET` | `/auth/user`           |  Required | Get logged in user info. |
 | `POST` | `/auth/profile_upload` |  Required | Upload a profile picture. |
 
 #### Register
@@ -136,18 +136,7 @@ POST /auth/register
   },
   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
 }
-```
 
-**Errors:**
-| Status | Reason |
-| :--- | :--- |
-| `400` | Missing or invalid fields |
-| `409` | Email or username already exists |
-| `429` | Too many requests |
-
----
-
-#### Login
 ```
 POST /auth/login
 ```
