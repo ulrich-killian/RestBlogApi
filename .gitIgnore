@@ -1,3 +1,6 @@
 /node_modules
 .env
 /.idea
+# Protect environment uploads folder layout from binary file tracking
+uploads/*
+!uploads/.gitkeep
