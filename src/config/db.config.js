@@ -17,6 +17,7 @@ async function connectDb() {
     client.release();
    } catch (err) {
       console.error('Database connection error:', err);
+      throw err;
    }
 }
 
