@@ -1,6 +1,6 @@
 import * as authService from '../services/auth.service.js';
-import { pool } from '../config/db.config.js';
 import AppError from '../utils/appError.js';
+import { pool } from '../config/db.config.js';
 
 export const register = async (req, res, next) => {
    try {

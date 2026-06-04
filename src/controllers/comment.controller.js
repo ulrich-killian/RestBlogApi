@@ -1,5 +1,5 @@
 import * as commentService from '../services/comment.service.js';
-import AppError from '../utils/appError.js'
+
 
 export const getCommentsByPostId = async (req, res, next) => {
   try {
@@ -32,9 +32,6 @@ export const deleteComment = async (req, res, next) => {
     await commentService.deleteComment(req.params.commentId, req.user.userId);
     res.status(200).json({ success: true, message: 'Comment deleted successfully' });
   } catch (error) {
-    if (error.message === 'COMMENT_NOT_FOUND') {
-      return res.status(404).json({ message: 'Comment not found' });
-    }
    next(error)
   }
 };

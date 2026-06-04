@@ -1,5 +1,5 @@
 import * as postService from '../services/post.service.js';
-import AppError from '../utils/appError.js'
+
 
 export const getAllPosts = async (req, res, next) => {
   try {
