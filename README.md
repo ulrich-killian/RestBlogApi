@@ -476,6 +476,8 @@ Authorization: Bearer <token>
 npm test
 ```
 
+visit swagger for full api doc: http://localhost:5500/api-docs
+
 ---
 
 ## Roadmap
