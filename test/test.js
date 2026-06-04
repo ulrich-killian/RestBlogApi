@@ -7,6 +7,7 @@ import authRoutes from '../src/routes/auth.route.js';
 import postRoutes from '../src/routes/post.route.js';
 import commentRoutes from '../src/routes/comment.route.js';
 import { globalErrorHandler } from '../src/middleware/error.middleware.js';
+import { pool } from '../src/config/db.config.js';
 
 dotenv.config();
 
@@ -162,11 +163,15 @@ describe('Post Endpoints', () => {
     const res = await request(app)
       .put(`/posts/${postId}`)
       .set('Authorization', `Bearer ${token}`)
-      .send({ title: 'Updated Test Post' });
+      .send({
+        title: 'Updated Test Post',
+        content: 'This is the mandatory content body required by the schema.'
+      });
+
     expect(res.statusCode).toBe(200);
     expect(res.body.data.title).toBe('Updated Test Post');
   });
-});
+}); // 💡 Fixed: Closes 'Post Endpoints' context properly before starting comments block
 
 // ─── COMMENT TESTS ────────────────────────────────────────
 describe('Comment Endpoints', () => {
@@ -218,7 +223,6 @@ describe('Comment Endpoints', () => {
     expect(res.body.success).toBe(true);
   });
 });
-import { pool } from '../src/config/db.config.js';
 
 afterAll(async () => {
   await pool.end();

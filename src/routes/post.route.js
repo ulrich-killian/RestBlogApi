@@ -140,7 +140,7 @@ router.post('/', protectedEntry, validatePost, checkValidation, createPost);
  *       404:
  *         description: Target post document matching identifier parameter was not found.
  */
-router.put('/:id', protectedEntry, updatePost);
+router.put('/:id', protectedEntry, validatePost, checkValidation, updatePost);
 
 /**
  * @openapi
