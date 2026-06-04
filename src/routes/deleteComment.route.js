@@ -30,6 +30,6 @@ const router = express.Router();
  *       404:
  *         description: Not Found - No comment matches the provided identifier.
  */
-router.delete('/:id', protectedEntry, deleteComment);
+router.delete('/:commentId', protectedEntry, deleteComment);
 
 export default router;
