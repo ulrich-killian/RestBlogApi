@@ -25,6 +25,10 @@ export const login = async (req, res, next) => {
 
 export const getUser = async (req, res, next) => {
   try {
+  if (!req.user || !req.user.userId) {
+        throw new AppError('Unauthorized access context parameters', 401);
+      }
+
     const user = await authService.getUser(req.user)
     res.status(200).json({ success: true, data: user });
   } catch (error) {
