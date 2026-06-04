@@ -43,7 +43,7 @@ export const uploadProfile = async (req, res, next) => {
  
      await pool.query(
        'UPDATE users SET profile_picture = $1 WHERE id = $2',
-       [fileUrl, req.user.id]
+       [fileUrl, req.user.userId]
      );
  
      res.status(200).json({
