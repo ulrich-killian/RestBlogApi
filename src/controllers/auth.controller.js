@@ -4,6 +4,7 @@ import { pool } from '../config/db.config.js';
 export const register = async (req, res) => {
    try {
       const { username, email, password } = req.body;
+
       const result = await authService.register({ username, email, password });
       res.status(201).json({ success: true, ...result });
    } catch (error) {
@@ -28,7 +29,7 @@ export const login = async (req, res) => {
 
 export const getUser = async (req, res) => {
   try {
-    const user = await authService.getMe(req.user.id)
+    const user = await authService.getUser(req.user)
     res.status(200).json({ success: true, data: user });
   } catch (error) {
     if (error.message === 'USER_NOT_FOUND') {

@@ -56,9 +56,9 @@ const seedData = async () => {
     const hash2 = await bcrypt.hash('password456', 10);
     const hash3 = await bcrypt.hash('password789', 10);
 
-    const u1 = await pool.query(`INSERT INTO users (username, email, password_hash) VALUES ('alice', 'alice@blog.com', $1) RETURNING id`, [hash1]);
-    const u2 = await pool.query(`INSERT INTO users (username, email, password_hash) VALUES ('bob', 'bob@blog.com', $1) RETURNING id`, [hash2]);
-    const u3 = await pool.query(`INSERT INTO users (username, email, password_hash) VALUES ('charlie', 'charlie@blog.com', $1) RETURNING id`, [hash3]);
+    const u1 = await pool.query(`INSERT INTO users (username, email, hash_password) VALUES ('alice', 'alice@blog.com', $1) RETURNING id`, [hash1]);
+    const u2 = await pool.query(`INSERT INTO users (username, email, hash_password) VALUES ('bob', 'bob@blog.com', $1) RETURNING id`, [hash2]);
+    const u3 = await pool.query(`INSERT INTO users (username, email, hash_password) VALUES ('charlie', 'charlie@blog.com', $1) RETURNING id`, [hash3]);
 
     const id1 = u1.rows[0].id;
     const id2 = u2.rows[0].id;

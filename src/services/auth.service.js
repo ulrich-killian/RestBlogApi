@@ -12,7 +12,7 @@ export const register  = async ({ username, password, email }) => {
          throw new Error('Email or username already exist');
       }
 
-      const salt = bcrypt.genSalt(12)
+      const salt = await bcrypt.genSalt(12)
       const hash_password = await bcrypt.hash(password, salt)
       const result = await pool.query(
          'INSERT INTO users (username, email, hash_password) VALUES ($1, $2, $3) RETURNING id, username, email, created_at',
@@ -26,7 +26,7 @@ export const register  = async ({ username, password, email }) => {
 };
 
 export const login = async ({ email, password }) => {
-   const result = pool.query('SELECT * FROM users WHERE email = $1', [email]);
+   const result = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
    if(result.rows.length === 0){
    throw new Error('Invalid Credentails')
    }
