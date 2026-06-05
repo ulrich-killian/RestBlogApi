@@ -14,7 +14,7 @@ const options = {
       description: 'A high-concurrency backend for Resful Blog Api',
     },
     servers: [
-      { url: 'http://localhost:3000', description: 'Development' },
+      { url: 'http://localhost:5500', description: 'Development' },
       { url: 'https://restfull-blog-api.onrender.com', description: 'Production' }
     ],
     components: {
