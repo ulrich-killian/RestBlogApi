@@ -68,7 +68,7 @@ npm run dev
 npm start
 ```
 
-Server starts at `http://localhost:3000`.  
+Server starts at `https://restfull-blog-api.onrender.com/`.  
 Tables and seed data are created automatically on first run.
 
 ### Running Tests
@@ -98,7 +98,7 @@ comments
 
 ## API Endpoints
 
-Base URL: `https://restfull-blog-api.onrender.com`
+Base URL: `https://restfull-blog-api.onrender.com/`
 
 >  Protected routes require: `Authorization: Bearer <token>`
 
@@ -476,7 +476,7 @@ Authorization: Bearer <token>
 npm test
 ```
 
-visit swagger for full api doc: http://localhost:5500/api-docs
+visit swagger for full api doc: https://restfull-blog-api.onrender.com/api-docs
 
 ---
 

@@ -22,7 +22,7 @@ const __dirname = path.dirname(__filename);
 
 const app = express()
 
-const port = process.env.PORT
+const port = process.env.PORT || 5500;
 
 app.use('/api-docs', swaggerUi.serve);
 app.get('/api-docs', swaggerUi.setup(swaggerSpec, {
