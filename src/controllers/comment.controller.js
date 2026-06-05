@@ -22,9 +22,9 @@ export const createComment = async (req, res, next) => {
     }
 
     const { content } = req.body;
-    if (!content || content.trim() === '') {
-      return res.status(400).json({ message: 'Content is required' });
-    }
+        if (typeof content !== 'string' || content.trim() === '') {
+          return res.status(400).json({ message: 'Content is required' });
+        }
 
     const comment = await commentService.createComment({
       content,

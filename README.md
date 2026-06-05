@@ -163,7 +163,7 @@ POST /auth/login
 
 #### Get logged in user
 ```
-GET /auth/me
+GET /auth/user
 Authorization: Bearer <token>
 ```
 **Success `200`:**
@@ -476,7 +476,7 @@ Authorization: Bearer <token>
 npm test
 ```
 
-visit swagger for full api doc: https://restfull-blog-api.onrender.com/api-docs
+Visit Swagger for full API docs: https://restfull-blog-api.onrender.com/api-docs
 
 ---
 

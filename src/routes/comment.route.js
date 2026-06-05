@@ -21,8 +21,9 @@ const router = express.Router({ mergeParams: true });
  *         name: id
  *         required: true
  *         schema:
- *           type: string
- *         description: The unique MongoDB object hexadecimal ID of the target blog post.
+ *           type: integer
+ *           minimum: 1
+ *         description: Numeric ID of the target blog post.
  *     responses:
  *       200:
  *         description: A collection array of comments retrieved successfully.
@@ -45,8 +46,9 @@ router.get('/', getCommentsByPostId);
  *         name: id
  *         required: true
  *         schema:
- *           type: string
- *         description: The unique MongoDB object hexadecimal ID of the blog post to comment on.
+ *           type: integer
+ *           minimum: 1
+ *         description: Numeric ID of the blog post to comment on.
  *     requestBody:
  *       required: true
  *       content:
@@ -85,14 +87,16 @@ router.post('/', protectedEntry, createComment);
  *         name: id
  *         required: true
  *         schema:
- *           type: string
- *         description: The hexadecimal identity string of the parent blog post.
+ *           type: integer
+ *           minimum: 1
+ *         description: Numeric ID of the parent blog post.
  *       - in: path
  *         name: commentId
  *         required: true
  *         schema:
- *           type: string
- *         description: The precise unique database ID of the comment targeted for removal.
+ *           type: integer
+ *           minimum: 1
+ *         description: Numeric ID of the comment targeted for removal.
  *     responses:
  *       200:
  *         description: Comment dropped and removed from database indexes successfully.
