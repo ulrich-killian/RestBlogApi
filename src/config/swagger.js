@@ -9,13 +9,13 @@ const options = {
   definition: {
     openapi: '3.0.0',
     info: {
-      title: 'Event Booking API',
+      title: 'Restful Blog API',
       version: '1.0.0',
-      description: 'A high-concurrency backend for event planning and seat reservations',
+      description: 'A high-concurrency backend for Resful Blog Api',
     },
     servers: [
       { url: 'http://localhost:3000', description: 'Development' },
-      { url: 'https://eventbookingapi-w0a3.onrender.com', description: 'Production' }
+      { url: 'https://restfull-blog-api.onrender.com', description: 'Production' }
     ],
     components: {
       securitySchemes: {
