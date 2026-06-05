@@ -6,7 +6,7 @@ const router = express.Router();
 
 /**
  * @openapi
- * /comments/{id}:
+ * /comments/{commentId}:
  *   delete:
  *     summary: Permanently delete a comment by its direct ID
  *     description: Drops a specific comment record from the database using its unique identifier. Restricted to the authenticated user who wrote the comment.
@@ -15,11 +15,12 @@ const router = express.Router();
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: id
+ *         name: commentId
  *         required: true
  *         schema:
- *           type: string
- *         description: The unique MongoDB hexadecimal Object ID of the comment to delete.
+ *           type: integer
+ *           minimum: 1
+ *         description: Numeric ID of the comment to delete.
  *     responses:
  *       200:
  *         description: Comment successfully deleted from the system database.
