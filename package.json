@@ -22,7 +22,6 @@
   },
   "homepage": "https://github.com/ulrich-killian/RestBlogApi#readme",
   "dependencies": {
-    "@prisma/adapter-pg": "^7.8.0",
     "bcrypt": "^6.0.0",
     "cors": "^2.8.6",
     "express": "^5.2.1",
